@@ -7,13 +7,14 @@ const http = require('http');
 const debug = require('debug')('weather-api:server');
 
 const app = require('../app');
+const commonConfig = require('../config/common');
 
 /**
  * Get port from environment and store in Express.
  */
 
 // eslint-disable-next-line no-use-before-define
-const port = normalizePort(process.env.PORT || '3002');
+const port = normalizePort(process.env.PORT || commonConfig.port);
 app.set('port', port);
 
 /**
