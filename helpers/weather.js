@@ -4,10 +4,12 @@ const weatherConfigs = require('../config/weather');
 const Weather = {
   getForeCastApiUrl: (key, val, type = 'forecast') => {
     return `${weatherConfigs.baseUrl +
-      weatherConfigs.foreCastParams}/${type}?APPID=${weatherConfigs.apiKey}&units=metric&${key}=${val}`;
+      weatherConfigs.foreCastParams}/${type}?APPID=${
+      weatherConfigs.apiKey
+    }&units=metric&${key}=${val}`;
   },
   generateWeatherInfo: ({ city, list }) => {
-    let resp = {
+    const resp = {
       details: {
         timezone: city.timezone,
         sunrise: city.sunrise,
@@ -18,29 +20,25 @@ const Weather = {
         pressure: !_.isEmpty(list) ? list[0].main.pressure : 0,
         weather: !_.isEmpty(list) ? list[0].weather[0].description : ''
       },
-      list: list.map((item) => {
-        return {
-          dt_txt: item.dt_txt,
-          temp: item.main.temp
-        };
-      })
+      list: list.map(item => ({
+        dt_txt: item.dt_txt,
+        temp: item.main.temp
+      }))
     };
 
     return resp;
   },
   generateMultipleCityData: ({ list }) => {
-    let resp = {
-      list: list.map((item) => {
-        return {
-          name: item.name,
-          country: item.sys.country,
-          timezone: item.sys.timezone,
-          coord: item.coord,
-          wind: item.wind,
-          weather: item.weather,
-          id: item.id
-        };
-      })
+    const resp = {
+      list: list.map(item => ({
+        name: item.name,
+        country: item.sys.country,
+        timezone: item.sys.timezone,
+        coord: item.coord,
+        wind: item.wind,
+        weather: item.weather,
+        id: item.id
+      }))
     };
 
     return resp;

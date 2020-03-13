@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get(
   '/:type/:cityId',
-  [ check('type').isString(), check('cityId').isNumeric() ],
+  [check('type').isString(), check('cityId').isNumeric()],
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -27,19 +27,20 @@ router.get(
     const { cityId, type } = req.params;
     const url = Weather.getForeCastApiUrl(type, cityId);
     request(url, (err, response, body) => {
+      // eslint-disable-next-line no-param-reassign
       body = JSON.parse(body);
       if (err) {
         res.status(400).json(Utils.generateResponse({}, 400, err));
       } else {
-        let status = body.cod;
-        let response = { data: {}, status, message: body.message };
+        const status = body.cod;
+        let bodyResponse = { data: {}, status, message: body.message };
         if (status === '200') {
-          response = Utils.generateResponse(
+          bodyResponse = Utils.generateResponse(
             Weather.generateWeatherInfo(body),
             status
           );
         }
-        res.status(status).json(response);
+        res.status(status).json(bodyResponse);
       }
     });
   }
@@ -53,8 +54,8 @@ router.get(
       .bail()
       .isArray()
       .bail()
-      .custom((a) => {
-        return a.every((e) => (e === '' ? false : true));
+      .custom(a => {
+        return a.every(e => e !== '');
       })
       .withMessage('Invalid City Id')
   ],
@@ -80,7 +81,7 @@ router.get(
       if (err) {
         res.status(400).json(Utils.generateResponse({}, 400, err));
       } else {
-        let data = Utils.generateResponse(
+        const data = Utils.generateResponse(
           Weather.generateMultipleCityData(body),
           200
         );

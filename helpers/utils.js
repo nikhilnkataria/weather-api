@@ -1,7 +1,5 @@
 const Utils = {
-  generateResponse: (data, status, message = '') => {
-    return { data, status, message };
-  }
+  generateResponse: (data, status, message = '') => ({ data, status, message })
 };
 
 module.exports = Utils;
