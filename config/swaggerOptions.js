@@ -8,7 +8,7 @@ module.exports = {
     basePath: '/',
     schemes: [ 'http' ],
     produces: [ 'application/json' ],
-    host: `localhost:${common.port}`
+    host: `134.122.126.73`
   },
   basedir: __dirname, //app absolute path
   files: [ '../routes/**/*.js' ]

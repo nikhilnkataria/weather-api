@@ -14,12 +14,12 @@
     "express-validator": "^6.4.0",
     "lodash": "^4.17.15",
     "morgan": "~1.9.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "express-swagger-generator": "^1.1.17"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "express-swagger-generator": "^1.1.17"
+    "eslint-plugin-import": "^2.20.1"
   }
 }
